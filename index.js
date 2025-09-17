@@ -1,18 +1,42 @@
-import dotenv from "dotenv";
-dotenv.config();
+import "dotenv/config";
 import { sendMail } from "./utils/sendMail.js";
 import XLSX from "xlsx";
-console.log("ENV:", {
-  host: process.env.SMTP_HOST,
-  port: process.env.SMTP_PORT,
-  user: process.env.SMTP_USER,
-  pass: process.env.SMTP_PASSWORD ? "✅" : "❌",
-});
+
 const htmlTemplate = `
-  <p>
-    Прохання встановити телеграм бот ГАЗМЕРЕЖІ 
-    <a href="https://t.me/your_bot_link">Встановити бот</a>
-  </p>
+  <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background: #fafafa;">
+    
+    <h2 style="color: #004aad; text-align: center;">Чат-бот <b>MYGRMU_BOT</b></h2>
+
+    <p style="font-size: 16px; text-align: center; margin-bottom: 20px;">
+      📞 Кол-центр ГРМУ: <b>0 800 303 104</b><br>
+      (дзвінки безкоштовні)
+    </p>
+
+    <p style="font-size: 16px; text-align: center;">
+      Встанови телеграм-бот<br>
+      <b>ТОВ "Газорозподільні мережі України" та передавай показники лічильника online</b>
+    </p>
+
+    <div style="text-align: center; margin: 20px 0;">
+      <a href="https://t.me/MYGRMU_BOT" 
+         style="display: inline-block; background: #004aad; color: #fff; text-decoration: none; padding: 12px 24px; border-radius: 6px; font-size: 16px; font-weight: bold;">
+        🚀 Встановити бот
+      </a>
+    </div>
+
+    <div style="text-align: center; margin: 20px 0;">
+      <img src="https://res.cloudinary.com/dingybgqw/image/upload/v1758105978/products/cttlxzgmdlgxendaudm1.jpg" width="420" style="max-width: 100%; border-radius: 6px; border: 1px solid #ccc;" alt="Інструкція">
+    </div>
+
+    <p style="text-align: center; margin: 10px 0; font-size: 15px;">
+      📲 Або скануй QR-код та реєструйся:
+    </p>
+
+    <div style="text-align: center;">
+      <img src="https://res.cloudinary.com/dingybgqw/image/upload/v1758105948/products/k5zyka6pfm38jjap3ndv.jpg" width="120" style="border: 1px solid #ccc; padding: 6px; border-radius: 6px;" alt="QR код">
+    </div>
+
+  </div>
 `;
 
 const workbook = XLSX.readFile("./emails.xlsx");
@@ -28,9 +52,9 @@ async function sendBulkEmails() {
 
     try {
       await sendMail({
-        from: process.env.SMTP_USER,
+        from: "k0vbasyuk.dim0n@gmail.com",
         to,
-        subject: "Встановіть наш Telegram-бот",
+        subject: "Встанови Telegram-бот ТОВ ГРМУ",
         html: htmlTemplate,
       });
       console.log(`✅ Лист надіслано: ${to}`);
@@ -38,7 +62,7 @@ async function sendBulkEmails() {
       console.error(`❌ Помилка для ${to}:`, err);
     }
 
-    await new Promise((res) => setTimeout(res, 1000));
+    await new Promise((res) => setTimeout(res, 2000));
   }
 
   console.log("📬 Розсилка завершена!");

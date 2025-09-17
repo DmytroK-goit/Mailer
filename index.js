@@ -1,7 +1,13 @@
-import "dotenv/config";
+import dotenv from "dotenv";
+dotenv.config();
 import { sendMail } from "./utils/sendMail.js";
 import XLSX from "xlsx";
-
+console.log("ENV:", {
+  host: process.env.SMTP_HOST,
+  port: process.env.SMTP_PORT,
+  user: process.env.SMTP_USER,
+  pass: process.env.SMTP_PASSWORD ? "✅" : "❌",
+});
 const htmlTemplate = `
   <p>
     Прохання встановити телеграм бот ГАЗМЕРЕЖІ 
@@ -22,7 +28,7 @@ async function sendBulkEmails() {
 
     try {
       await sendMail({
-        from: `"Газмережі" <${process.env.SMTP_USER}>`,
+        from: process.env.SMTP_USER,
         to,
         subject: "Встановіть наш Telegram-бот",
         html: htmlTemplate,

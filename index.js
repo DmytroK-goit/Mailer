@@ -4,7 +4,9 @@ import XLSX from "xlsx";
 
 const htmlTemplate = `
   <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background: #fafafa;">
-    
+    <h1 style="font-size: 20px; text-align: center;" >Шановний клієнте</h1>
+    <p style="font-size: 16px; text-align: center;">Наш контролер не застав Вас дома.</p>
+    <p style="font-size: 16px; text-align: center;">Будь ласка, передайте показники лічильника в найкоротший термін</p>
     <h2 style="color: #004aad; text-align: center;">Чат-бот <b>MYGRMU_BOT</b></h2>
 
     <p style="font-size: 16px; text-align: center; margin-bottom: 20px;">
@@ -52,7 +54,7 @@ async function sendBulkEmails() {
 
     try {
       await sendMail({
-        from: "k0vbasyuk.dim0n@gmail.com",
+        from: "grmuvinnytsia@gmail.com",
         to,
         subject: "Встанови Telegram-бот ТОВ ГРМУ",
         html: htmlTemplate,
